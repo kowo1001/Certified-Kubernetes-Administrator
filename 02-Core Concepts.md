@@ -100,16 +100,16 @@
 `# NGINX 포드 생성`
 kubectl run nginx --image=nginx
 
-`# POD 매니페스트 YAML 파일 (-o yaml)을 생성합니다. 만들지 마세요 (--dry-run)
+`# POD 매니페스트 YAML 파일 (-o yaml)을 생성합니다. 만들지 마세요 (--dry-run)`
 kubectl run nginx --image=nginx --dry-run=client -o yaml
 
 `# 배포 만들기`
 kubectl create deployment --image=nginx nginx
 
-`# 배포 YAML 파일(-o yaml)을 생성합니다. 만들지 마세요 (--dry-run)
+`# 배포 YAML 파일(-o yaml)을 생성합니다. 만들지 마세요 (--dry-run)`
 kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
 
-`# 4개의 복제본으로 배포 생성
+`# 4개의 복제본으로 배포 생성`
 kubectl create deployment nginx --image=nginx --replicas=4
 kubectl scale deployment nginx --replicas=4
 kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml
