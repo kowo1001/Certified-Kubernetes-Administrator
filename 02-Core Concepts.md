@@ -27,7 +27,7 @@
 - 데이터가 복잡해지면 JSON 또는 YANO와 같은 데이터 형식으로 저장할 수 있음
 
 ### ETCD 설치 및 작동
-(생략)
+(생략 - 추가 작성 예정)
 
 - 역할 
 	- 클러스터에 관한 정보를 저장함 (Nodes, PODs, Configs, Secrets, Accounts, Roles, Bindings, Others)
