@@ -89,3 +89,35 @@
 	- wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-proxy
 	- kubectl get pods -n kube-system
 	- kubectl get daemonset -n kube-system
+
+
+  ### kodekloud 실습 (Tips)
+- --dry-run : 기본적으로 명령이 실행되는 즉시 리소스가 생성됨
+	- 단순히 명령을 테스트하려는 경우, --dry-run=client 옵션을 사용. 
+	- 리소스를 생성하는 것이 아니라 리소스를 생성할 수 있는지 여부와 명령이 올바른지 여부를 알려줌
+- -o yaml : 리소스 정의를 YAML 형식으로 화면에 출력함
+
+`# NGINX 포드 생성`
+kubectl run nginx --image=nginx
+
+`# POD 매니페스트 YAML 파일 (-o yaml)을 생성합니다. 만들지 마세요 (--dry-run)
+kubectl run nginx --image=nginx --dry-run=client -o yaml
+
+`# 배포 만들기`
+kubectl create deployment --image=nginx nginx
+
+`# 배포 YAML 파일(-o yaml)을 생성합니다. 만들지 마세요 (--dry-run)
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+
+`# 4개의 복제본으로 배포 생성
+kubectl create deployment nginx --image=nginx --replicas=4
+kubectl scale deployment nginx --replicas=4
+kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml
+
+`# 포트 6379에서 포드 redis를 노출하기 위해 ClusterIP 유형의 redis-service라는 서비스를 만듭니다.`
+kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml 
+kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml
+
+`# NodePort 유형의 nginx라는 서비스를 만들어 노드의 포트 30080에서 포드 nginx의 포트 80을 노출합니다`
+kubectl expose pod nginx --type=NodePort --port=80 --name=nginx-service --dry-run=client -o yaml
+kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client -o yaml
